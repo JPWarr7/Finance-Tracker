@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="JPWarr">
+
+    <title>Finance Tracker</title>
+
+    <!-- CSS FILES -->      
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <link href="../static/css/styles.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik+Iso">
+
+
+</head>
+
+<body>
+    
+<div class="topnav">
+    <p class="font1" href="#home">Finance Tracker</p>
+    <div class="right-links">
+            <a class="a2" onclick="openAccountInfo()">Account Info</a>
+            <a class="a2" href="/logout">Sign Out</a>
+    </div>
+</div>
+<!-- account info -->
+<section id="account-info">
+
+    <div class="accountinfocard" id="accountInfo">
+
+        <h5 class="accountinfocard-title">Account Info</h5>
+        <p class="accountinfocard-text">Name: {{current_user.first_name}} {{current_user.last_name}}</p>
+        <p class="accountinfocard-text">Email: {{current_user.email}} </p>
+        <p> <a class="accountinfocard-text" href="/viewPaymentMethods">Payment Methods </a> </p>
+        <p> <a class="accountinfocard-text" href="/viewTransactions">Transactions </a> </p>
+
+        <!-- note: transform into changePasswordForm -->
+        <a href="/changePassword"> <button type="button" class="submit-button">Change Password</button> </a>
+        <button type="button" class="cancel-button" onclick= "closeAccountInfo()">Close</button>
+
+    </div>
+    
+</section>
+
+<section id = "details">
+    <div class="detailscard">
+
+        {% for item in info %}
+        
+            {% if item[0] == "transaction" %}
+
+                <h5 class="transactioncard-title">Transaction Info</h5>
+
+                    <form action="/updateTransaction/{{item[8]}}" method="POST" class="add-transaction webform"  role="form">
+
+                        <div class="form-group d-flex flex-column-reverse">
+                            <textarea class="addtransactioncard-title-input" name="title" id="title">{{item[1]}}</textarea>
+                        </div>
+
+                        <div class="form-group d-flex flex-column-reverse">
+                            <textarea class="addtransactioncard-date-input" name="date" id="date" >{{item[2]}}</textarea>>
+                        </div>
+
+                        <div class="form-group d-flex flex-column-reverse">
+                            <textarea class="addtransactioncard-amount-input" name="amount" id="amount">{{item[3]}}</textarea>
+                        </div>
+
+                        {% if item[4] == None %}
+                        <div class="form-group d-flex flex-column-reverse">
+                            <input type="text" class="addtransactioncard-card-input" name="card" id="card" placeholder="Card">
+                        </div>
+                        {% endif %}
+                        {% if item[4] != None %}
+                        <div class="form-group d-flex flex-column-reverse">
+                            <textarea class="addtransactioncard-card-input" name="card" id="card">{{item[4]}}</textarea>
+                        </div>
+                        {% endif %}
+                        <div class="form-group d-flex flex-column-reverse">
+                            <textarea class="addtransactioncard-type-input" name="type" id="type">{{item[5]}}</textarea>
+                        </div>
+
+                        <div class="form-group d-flex flex-column-reverse">
+                            <textarea class="addtransactioncard-category-input" name="category" id="category">{{item[6]}}</textarea>
+                        </div>
+
+                        <div class="form-group d-flex flex-column-reverse">
+                            <textarea class="addtransactioncard-comments-input" name="comments" id="comments">{{item[7]}}</textarea>
+                        </div>
+                        <button type="submit" class="update-button">Update Transaction</button>
+                    </form>
+                    
+                    <button class="close-button" onclick="document.location.href='/home';return true;">Close</button>
+                    <button class="delete-button" onclick="document.location.href='/deleteTransaction/{{item[8]}}';return true;">Delete Transaction</button>
+                </div>
+
+            {% endif %}
+
+            {% if item[0] == "payment_method" %}
+
+            <h5 class="transactioncard-title">Payment Method Info</h5>
+
+                <!-- <h5 class="transactioninfo-title">Card {{card_id}}: </h5>
+                <p class="transactionscard-text">{{name}}</p>
+                <p class="transactionscard-text">{{number}}</p>
+                <p class="transactionscard-text">{{expiration}} || {{code}}</p> -->
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <textarea class="addtransactioncard-title-input" name="expiration" id="expiration" readonly >{{item[4]}}</textarea>
+                </div>
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <textarea class="addtransactioncard-date-input" name="code" id="code" readonly >{{item[5]}}</textarea>>
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <textarea class="addtransactioncard-amount-input" name="amount" id="card" readonly >Card {{item[1]}}:</textarea>
+                </div>
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <textarea class="addtransactioncard-card-input" name="card" id="card" readonly >{{item[3]}}</textarea>
+                </div>
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <textarea class="addtransactioncard-type-input" name="type" id="type" readonly >{{item[2]}}</textarea>
+                </div>
+
+                <button class="close-button" onclick="document.location.href='/home';return true;">Close</button>
+                <button class="delete-button" onclick="document.location.href='/deletePaymentMethod/{{item[1]}}';return true;">Delete Payment Method</button>
+
+            {% endif %}
+
+        {% endfor %}
+    </div>
+
+</section>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  {% for category, message in messages %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
+<script>
+    function openAccountInfo() {
+        document.getElementById("accountInfo").style.display = "block";
+      }
+      function closeAccountInfo() {
+        document.getElementById("accountInfo").style.display = "none";
+      }
+</script>
+
+</body>
+</html>

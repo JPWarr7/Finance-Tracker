@@ -19,6 +19,7 @@ MAIL_APP_PASSWORD = environ.get('MAIL_APP_PASSWORD')
 MAIL_SENDER_NAME = environ.get('MAIL_SENDER_NAME')
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'JPWarr'
 
 # Specify the connection parameters/credentials for the database
 DB_CONFIG_STR = f"mysql+mysqlconnector://{USERNAME}:{PASSWORD}@{IP}/{DB_NAME}"
@@ -27,6 +28,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= True
 
 # Create database connection and associate it with the Flask application
 db = SQLAlchemy(app)
+# print('db created')
 
 # Import the User model after creating the db object
 from app.models import User
@@ -51,5 +53,21 @@ app.config.update(
         )
 
 mail = Mail(app)
+
+# Add models
+from app import routes, models
+from populate_db import populate_db
+
+with app.app_context():
+    try:
+        db.drop_all()
+        db.create_all()
+        # populate_db()
+    except Exception as e:
+        print("Error:", e)
+
+# Populate database
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run(host="0.0.0.0", port=8000, debug=True)

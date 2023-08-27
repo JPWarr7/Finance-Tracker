@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="JPWarr">
 
-    <title>Finance Temp</title>
+    <title>Finance Tracker</title>
 
     <!-- CSS FILES -->      
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,36 +16,354 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/styles.css" rel="stylesheet">
 
-    <link href="css/bootstrap-icons.css" rel="stylesheet">
-
-    <link href="css/apexcharts.css" rel="stylesheet">
-
-    <link href="css/tooplate-mini-finance.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik+Iso">
 </head>
 
-<body>
+<body id = "body">
 
-    <form action="">
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
 
-    <form action="/send_email" method="POST">
-        
+<div class="topnav">
+    <p class="font1" href="#home">Finance Tracker</p>
+    <div class="right-links">
+            <a class="a2" onclick="openAccountInfo()">Account Info</a>
+            <a class="a2" href="/logout">Sign Out</a>
+    </div>
+</div>
+
+<section id="graphs">
+
+    <div class ="plotgraphcard">
+        <h5 class="transactioncard-title"> Graphs </h5>
+        <div class ="graph">
+            {% autoescape off %}
+            {{ line_graph }}
+            {% endautoescape %}
+        </div>
+
+        <div class ="graph">
+            {% autoescape off %}
+            {{ pie_chart }}
+            {% endautoescape %}
+        </div>
+
+    </div>
+
+</section>
+
+<section id="transactions">
+
+    <div class="transactionscard">
+
+        <h5 class="transactioncard-title">Recent Transactions </h5>
+        {% for id, title, date, amount, type, category, comments in transactions_preview %}
+
+        <!-- create transaction tile block in CSS -->
+            <div class="transactioninfo" onclick="document.location.href='/viewTransaction/{{id}}';return true;" class="exterior">
+
+                <p class="transactioninfo-title">{{title}}: ${{amount}} </p>
+                <p class="transactionscard-text"> </p>
+                <p class="transactionscard-text">{{category}} ({{date}})</p>
+                <p class="transactionscard-text">{{comments}}</p>
+
+            </div>
+
+        {% endfor %}
+        <button class="submit-button" onclick="openAddTransactionForm()">Add Transaction</button>
+        <button class="cancel-button" onclick="openAllTransactions()">View All</button>
+    </div>
+</section>
+{% if current_user.newuser == True %}
+<section id="paymentmethods">
+    <div class="paymentmethodscard">
+        <h5 class="transactioncard-title">New Users</h5>
+        <form action="/newuser" method="POST" class="new-user webform" role="form">
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="text" class="addtransactioncard-amount-input" name="amount" id="amount" placeholder="Starting Amount" required>
+            </div>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="file" accept=".csv" class="addtransactioncard-card-input" name="csv" id="csv" placeholder="Upload Files (csv only)" required>
+            </div>
+
+            <button type="submit" id="submit-button" class="addpaymentmethod-button">Start Tracking!</button>
+        </form>
+    </div>
+</section>
+
+{% endif %}
+
+{% if current_user.newuser == False %}
+<section id="paymentmethods">
+    <div class="paymentmethodscard">
+        <h5 class="transactioncard-title">Payment Methods</h5>
+        {% for card_id, number, name, expiration, code in payment_methods %}
+
+        <div class="transactioninfo" onclick="document.location.href='/viewPaymentMethod/{{card_id}}';return true;" class="exterior">
+
+            <h5 class="transactioninfo-title">Card {{card_id}}: </h5>
+            <p class="transactionscard-text">{{name}}</p>
+            <p class="transactionscard-text">{{number}}</p>
+            <p class="transactionscard-text">{{expiration}} || {{code}}</p>
+
+        </div>
+
+        {% endfor %}
+        <button class="addpaymentmethod-button" onclick="openPaymentMethodForm()">Add Payment Method</button>
+    </div>
+</section>
+{% endif %}
+
+<div class = "blur" id = "blur">
+
+<!-- ADD TRANSACTION -->
+<section id="addTransaction">
+    <div class="addtransactioncard" id="addTransactionForm">
+        <form action="/addtransaction" method="POST" class="add-transaction webform"  role="form">
+            
+            <h5 class="addtransactioncard-title">Add Transaction</h5>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="text" class="addtransactioncard-title-input" name="title" id="title" placeholder="Title" required>
+            </div>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="text" class="addtransactioncard-date-input" name="date" id="date" placeholder="Transaction Date" required>
+            </div>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="text" class="addtransactioncard-amount-input" name="amount" id="amount" placeholder="Amount" required>
+            </div>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="text" class="addtransactioncard-card-input" name="card" id="card" placeholder="Card">
+            </div>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="text" class="addtransactioncard-type-input" name="type" id="type" placeholder="Transaction Type" required>
+            </div>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="text" class="addtransactioncard-category-input" name="category" id="category" placeholder="Transaction Category" required>
+            </div>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <textarea class="addtransactioncard-comments-input" name="comments" id="comments" placeholder="Comments"></textarea>
+            </div>
+
+            <button type="submit" class="submit-button" id="submit-button" name="submit">Add Transaction</button>
+            <button type="reset" class="cancel-button" onclick=" closeAddTransactionForm()">Cancel</button>
+        </form>
+    </div>
+</section>
+    
+<!-- ALL TRANSACTIONS -->
+<section id="all transactions">
+
+    <div class="alltransactionscard" id="alltransactionscard">
+
+        <h5 class="transactioncard-title">All Transactions</h5>
+        {% for id, title, date, amount, type, category, comments in transactions%}
+
+        <!-- create transaction tile block in CSS -->
+            <div class="transactioninfo" onclick="document.location.href='/viewTransaction/{{id}}';return true;" class="exterior">
+
+                <p class="transactioninfo-title">{{title}}: ${{amount}} </p>
+
+                <p class="transactionscard-text"> </p>
+
+                <p class="transactionscard-text">{{category}} ({{date}})</p>
+
+                <p class="transactionscard-text">{{comments}}</p>
+            </div>
+
+        {% endfor %}
+        <button class="alltransactions-button1" onclick="openAddTransactionForm()">Add Transaction</button>
+        <button class="alltransactions-button2" onclick="closeAllTransactions()">Close</button>
+    </div>
+</section>
+
+<!-- add payment method -->
+<section id="payment-method">
+
+        <div class="addtransactioncard" id="addPaymentMethodForm">
+            <form action="/addpaymentmethod" method="POST" class="add-payment-method webform"  role="form">
+                
+                <h5 class="addtransactioncard-title">Add Payment Method</h5>
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <input type="text" class="addtransactioncard-amount-input" name="number" id="number" placeholder="Card Number" required>
+                </div>
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <input type="text" class="addtransactioncard-card-input" name="name" id="name" placeholder="Cardholder Name" required>
+                </div>
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <input type="text" class="addtransactioncard-type-input" name="expiration" id="expiration" placeholder="Card Expiration" required>
+                </div>
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <input type="text" class="addtransactioncard-category-input" name="code" id="code" placeholder="CVC" required>
+                </div>
+
+                <button type="submit" class="submit-button" id="submit-button" name="submit">Add Payment Method</button>
+                <button type="reset" class="cancel-button" onclick="closePaymentMethodForm()">Close</button>
+            </form>
+        </div>
+</section>
+
+<!-- ALL TRANSACTIONS -->
+<section id="all transactions">
+
+    <div class="alltransactionscard" id="alltransactionscard">
+
+        <h5 class="transactioncard-title">All Transactions</h5>
+        {% for id, title, date, amount, type, category, comments in transactions%}
+
+        <!-- create transaction tile block in CSS -->
+            <div class="transactioninfo" onclick="document.location.href='/viewTransaction/{{id}}';return true;" class="exterior">
+
+                <p class="transactioninfo-title">{{title}}: ${{amount}} </p>
+
+                <p class="transactionscard-text"> </p>
+
+                <p class="transactionscard-text">{{category}} ({{date}})</p>
+
+                <p class="transactionscard-text">{{comments}}</p>
+            </div>
+
+        {% endfor %}
+        <button class="alltransactions-button1" onclick="openAddTransactionForm()">Add Transaction</button>
+        <button class="alltransactions-button2" onclick="closeAllTransactions()">Close</button>
+    </div>
+</section>
+
+<!-- ACCOUNT INFO -->
+<section id="account-info">
+    <div class="accountinfocard" id="accountInfo">
+
+        <h5 class="accountinfocard-title">Account Info</h5>
+        <div class ="accountinfocard-inner">
+            <p class="accountinfocard-text">Name: {{current_user.first_name}} {{current_user.last_name}}</p>
+            <p class="accountinfocard-text">Email: {{current_user.email}} </p>
+            <p> <a class="accountinfocard-text" href="/viewPaymentMethods">Payment Methods </a> </p>
+            <p> <a class="accountinfocard-text" onclick="openAllTransactions()">View Transactions </a> </p>
+        </div>
+        <!-- note: transform into changePasswordForm -->
+        <button type="button" class="submit-button" onclick= "openChangePassword()">Change Password</button>
+        <button type="button" class="cancel-button" onclick= "closeAccountInfo()">Close</button>
+    </div>
+</section>
+
+<!-- CHANGE PASSWORD  -->
+<section id="change-password">
+    <div class="addtransactioncard" id="changePassword">
+            
+            <form action="/changepassword" method="POST" class="add-payment-method webform"  role="form">
+
+                <h5 class="accountinfocard-title">Change Password</h5>
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <input type="text" class="addtransactioncard-card-input" name="new_password" id="new_password" placeholder="New Password" required>
+                </div>
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <input type="text" class="addtransactioncard-type-input" name="password_retype" id="password_retype" placeholder="Password Retype" required>
+                </div>
+
+                <button type="submit" class="submit-button" id="submit-button" name="submit">Change Password</button>
+                <button type="reset" class="cancel-button" onclick="closeChangePassword()">Close</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  {% for category, message in messages %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
+<script>
+
+    function openChangePassword() {
+        document.getElementById("changePassword").style.display = "block";
+        document.getElementById("blur").style.backdropFilter="blur(8px)";
+        document.getElementById("accountInfo").style.display = "none";
+  
+        document.getElementById("addPaymentMethodForm").style.display = "none";
+        document.getElementById("alltransactionscard").style.display = "none";
+        document.getElementById("addTransactionForm").style.display = "none";
+      }
+  
+      function closeChangePassword() {
+        document.getElementById("changePassword").style.display = "none";
+        document.getElementById("blur").style.backdropFilter = "none";
+        openAccountInfo()
+      }
+
+    function openAccountInfo() {
+      document.getElementById("accountInfo").style.display = "block";
+      document.getElementById("blur").style.backdropFilter="blur(8px)";
+
+      document.getElementById("addPaymentMethodForm").style.display = "none";
+      document.getElementById("alltransactionscard").style.display = "none";
+      document.getElementById("addTransactionForm").style.display = "none";
+    }
+
+    function closeAccountInfo() {
+      document.getElementById("accountInfo").style.display = "none";
+      document.getElementById("blur").style.backdropFilter = "none";
+    }
+
+    function openPaymentMethodForm() {
+      document.getElementById("addPaymentMethodForm").style.display = "block";
+      document.getElementById("blur").style.backdropFilter="blur(8px)";
+
+      document.getElementById("alltransactionscard").style.display = "none";
+      document.getElementById("addTransactionForm").style.display = "none";
+      document.getElementById("accountInfo").style.display = "none";
+    }
+
+    function closePaymentMethodForm() {
+      document.getElementById("addPaymentMethodForm").style.display = "none";
+      document.getElementById("blur").style.backdropFilter = "none";
+    }
+
+    function openAllTransactions() {
+      document.getElementById("alltransactionscard").style.display = "block";
+      document.getElementById("blur").style.backdropFilter="blur(8px)";
+
+      document.getElementById("addTransactionForm").style.display = "none";
+      document.getElementById("accountInfo").style.display = "none";
+      document.getElementById("addPaymentMethodForm").style.display = "none";
+    }
+
+    function closeAllTransactions() {
+      document.getElementById("alltransactionscard").style.display = "none";
+      document.getElementById("blur").style.backdropFilter = "none";
+    }
+
+    function openAddTransactionForm() {
+      document.getElementById("addTransactionForm").style.display = "block";
+      document.getElementById("blur").style.backdropFilter="blur(8px)";
+
+      document.getElementById("accountInfo").style.display = "none";
+      document.getElementById("addPaymentMethodForm").style.display = "none";
+      document.getElementById("alltransactionscard").style.display = "none";
+    }
+    function closeAddTransactionForm() {
+      document.getElementById("addTransactionForm").style.display = "none";
+      document.getElementById("blur").style.backdropFilter = "none";
+    }
+    
+</script>
+
 </body>
 
 </html>

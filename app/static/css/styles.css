@@ -1,0 +1,868 @@
+/* @import "compass/css3"; */
+/* HEADING */
+
+
+html {
+    height: 100%;
+}
+
+.top{
+    position: relative;
+    top: 0%;
+    background-color:#05010E;
+}
+
+.body2 {
+  overflow:hidden;
+  height: 100vh;
+  margin: 0;
+  background-image: linear-gradient(to bottom, #000000, #000000, #040404, #070707, #0b0b0b, #0e0e0e, #171717, #1e1e1e, #252525, #343434, #434343, #535353);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  backdrop-filter: none;
+  width: 100%;
+}
+
+body {
+    height: 1500px;
+    margin: 0;
+    background-image: linear-gradient(to bottom, #000000, #000000, #040404, #070707, #0b0b0b, #0e0e0e, #171717, #1e1e1e, #252525, #343434, #434343, #535353);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    backdrop-filter: none;
+    width: 100%;
+}
+
+/* NAVBAR */
+
+.topnav {
+    overflow: hidden;
+    background-color:#000000 ;
+    display: flex;
+    justify-content: space-between;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 40px 30px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.topnav .a2:hover {
+    background-color: #dce0e0a9;
+    color: rgb(196, 180, 180);
+}
+
+.topnav a.active {
+    background-color: #adadadd3;
+    color: white;
+}
+
+.right-links {
+    display: flex;
+    justify-content: flex;
+    align-items: center;
+}
+
+/* FONTS */
+
+.font1{
+    font-family: "Rubik Iso", sans-serif;
+    text-shadow: 0 0 3px #806e6e, 0 0 5px #9e9ebb;
+    color: white;
+    margin-left: 20px;
+    padding-top:8px;
+    font-size: 22px;
+}
+
+.h1{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: auto;
+}
+  
+/* LOGIN */
+
+.logincard {
+    position: absolute;
+    display: none;
+    left: 575px;
+    top: 150px;
+    width: 500px;
+    height: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color:#101010;
+  }
+  
+  .logincard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  .logincard-title {
+    position: absolute;
+    top: -20px;
+    left: 220px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px #918e8ebb;
+  }
+
+  .logincard-text {
+    position: relative;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  
+  .logincard-email-input {
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    margin-left: 88px;
+    margin-top: 55px;
+    margin-bottom: 15px; /* increase margin to add more space */
+    width: 60%;
+  }
+
+  .logincard-password-input {
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    margin-left: 88px;
+    margin-top: 5px;
+    margin-bottom: 15px; /* increase margin to add more space */
+    width: 60%;
+  }
+
+/* SIGN UP */
+
+.signupcard {
+    position: absolute;
+    display: none;
+    left: 575px;
+    top: 150px;
+    width: 500px;
+    height: 360px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color:#101010;
+  }
+  
+  .signupcard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  .signupcard-title {
+    position: absolute;
+    top: -20px;
+    left: 220px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px #918e8ebb;
+  }
+
+  .signupcard-text {
+    position: relative;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+
+  .signupcard-fname-input {
+    position: absolute;
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    margin: 0 auto; /* increase margin to add more space */
+    width: 25%;
+    top: 55px;
+    left: 88px;
+  }
+
+  .signupcard-lname-input {
+    position: absolute;
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    margin: 0 auto; /* increase margin to add more space */
+    width: 25%;
+    top: 55px;
+    right: 88px;
+  }
+  
+  .signupcard-email-input {
+    position: absolute;
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    left: 89px;
+    top: 110px;
+    width: 60%;
+  }
+
+  .signupcard-password-input {
+    position: absolute;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    left: 89px;
+    top: 165px;
+    width: 60%;
+  }
+
+  .signupcard-password-retype {
+    position: absolute;
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    left: 89px;
+    top: 220px;
+    width: 60%;
+  }
+
+/* ACCOUNT INFO */
+
+.accountinfocard {
+    position: absolute;
+    align-items: center;
+    display: none;
+    left: 575px;
+    top: 150px;
+    width: 500px;
+    height: 360px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color:#101010;
+  }
+  
+  .accountinfocard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  .accountinfocard-title {
+    position: absolute;
+    text-align: center;
+    top: 20px;
+    left: 190px;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 25px;
+    text-shadow: 2px 2px #918e8ebb;
+    margin-bottom: 30px;
+    margin-top: 0;
+  }
+
+  .accountinfocard-text {
+    position: relative;
+    top: 10px;
+    left: 50px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+
+  .accountinfocard-inner {
+    position: absolute;
+    align-items: center;
+    top: 75px;
+    left:48px;
+    width: 80%;
+    height: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color:#1e1e1e;
+  }
+
+/* BUTTONS */
+
+.submit-button {
+    position: absolute;
+    bottom: 35px;
+    left: 100px;
+    display: block;
+    margin: 0 auto;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border: 1px solid #918e8ebb;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #dce0e0a9;
+    color: rgb(196, 180, 180);
+    border: #ffffff;
+    border-style: solid;
+  }
+  
+  .submit-button:focus,
+  .submit-button:active {
+    outline: none;
+    background-color: #f1f2f3;
+  }
+
+.cancel-button {
+    position: absolute;
+    bottom: 35px;
+    right: 100px;
+    display: block;
+    margin: 0 auto;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border: 1px solid #918e8ebb;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .cancel-button:hover {
+    background-color: #dce0e0a9;
+    color: rgb(196, 180, 180);
+    border: #ffffff;
+    border-style: solid;
+  }
+  
+  .cancel-button:focus,
+  .cancel-button:active {
+    outline: none;
+    background-color: #f1f2f3;
+  }
+
+  .update-button {
+    position: absolute;
+    bottom: 110px;
+    left: 100px;
+    display: block;
+    margin: 0 auto;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border: 1px solid #918e8ebb;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .update-button:hover {
+    background-color: #dce0e0a9;
+    color: rgb(196, 180, 180);
+    /* background-color: #34cceb;
+    color: #fffdfd; */
+    border: #ffffff;
+    border-style: solid;
+  }
+  
+  .update-button:focus,
+  .update-button:active {
+    outline: none;
+    background-color: #f1f2f3;
+  }
+
+.close-button {
+    position: absolute;
+    bottom: 110px;
+    right: 100px;
+    display: block;
+    margin: 0 auto;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border: 1px solid #918e8ebb;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    background-color: #dce0e0a9;
+    color: rgb(196, 180, 180);
+    border: #ffffff;
+    border-style: solid;
+  }
+  
+  .close-button:focus,
+  .close-button:active {
+    outline: none;
+    background-color: #f1f2f3;
+  }
+
+  .delete-button {
+    position: absolute;
+    bottom: 35px;
+    right: 20%;
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border: 1px solid #918e8ebb;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .delete-button:hover {
+    background-color: #b30707a9;
+    color: rgb(196, 180, 180);
+    border: #ffffff;
+    border-style: solid;
+  }
+  
+  .delete-button:focus,
+  .delete-button:active {
+    outline: none;
+    background-color: #f1f2f3;
+  }
+
+  .alltransactions-button1 {
+    position: absolute;
+    top: 35px;
+    left: 50px;
+    display: block;
+    margin: 0 auto;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border: 1px solid #918e8ebb;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .alltransactions-button1:hover {
+    background-color: #dce0e0a9;
+    color: rgb(196, 180, 180);
+    border: #ffffff;
+    border-style: solid;
+  }
+  
+  .alltransactions-button1:focus,
+  .alltransactions-button1:active {
+    outline: none;
+    background-color: #f1f2f3;
+  }
+
+.alltransactions-button2 {
+    position: absolute;
+    top: 35px;
+    right: 100px;
+    display: block;
+    margin: 0 auto;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border: 1px solid #918e8ebb;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .alltransactions-button2:hover {
+    background-color: #dce0e0a9;
+    color: rgb(196, 180, 180);
+    border: #ffffff;
+    border-style: solid;
+  }
+  
+  .alltransactions-button2:focus,
+  .alltransactions-button2:active {
+    outline: none;
+    background-color: #f1f2f3;
+  }
+
+.addpaymentmethod-button {
+    position: absolute;
+    bottom: 35px;
+    left: 155px;
+    display: block;
+    margin: 0 auto;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    border: 1px solid #918e8ebb;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .addpaymentmethod-button:hover {
+    background-color: #dce0e0a9;
+    color: rgb(196, 180, 180);
+    border: #ffffff;
+    border-style: solid;
+  }
+  
+  .addpaymentmethod-button:focus,
+  .addpaymentmethod-button:active {
+    outline: none;
+    background-color: #f1f2f3;
+  }
+
+/* DETAILS */
+
+.detailscard {
+    position: absolute;
+    left: 575px;
+    top: 150px;
+    width: 500px;
+    height: 625px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color:#101010;
+  }
+
+/* TRANSACTIONS */
+
+.alltransactionscard {
+    left: 450px;
+    position: absolute;
+    align-items: center;
+    align-content: center;
+    display: none;
+    top: 150px;
+    width: 600px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color:#101010;
+    backdrop-filter: blur(5px);
+  }
+
+.transactionscard {
+    position: absolute;
+    align-items: center;
+    right: 5%;
+    top: 150px;
+    width: 500px;
+    height: 700px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color:#101010;
+  }
+
+  .transactionscard-text {
+    position: relative;
+    font-size: 16px;
+    margin: 3%;
+    color: #ffffff;
+  }
+
+  .transactioninfo {
+    position: relative;
+    align-items: center;
+    align-self: center;
+    width: 400px;
+    height: 150px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin: 7%;
+    background-color:#1e1e1e;
+  }
+
+  .transactioninfo-title {
+    position: relative;
+    padding-top: 10px;
+    position: relative;
+    font-size: 16px;
+    margin: 3%;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  .transactioncard-title {
+    position: relative;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px #918e8ebb;
+  }
+    .transactioninfo:hover {
+        background-color: #dce0e0a9;
+  }
+
+  /* PAYMENT METHODS */
+.paymentmethodscard {
+    position: absolute;
+    right: 5%;
+    top: 890px;
+    width: 500px;
+    height: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    background-color:#101010;
+  }
+
+
+/* ADD TRANSACTION */
+
+.addtransactioncard {
+    position: absolute;
+    display: none;
+    left: 575px;
+    top: 150px;
+    width: 500px;
+    height: 550px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color:#101010;
+  }
+  
+  .addtransactioncard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  .addtransactioncard-title {
+    position: relative;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px #918e8ebb;
+  }
+
+  .addtransactioncard-text {
+    position: relative;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+
+  .addtransactioncard-title-input {
+    position: absolute;
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #e8e1e1bb;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    margin: 0 auto; /* increase margin to add more space */
+    width: 25%;
+    top: 80px;
+    left: 88px;
+    height: 22px;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+
+  .addtransactioncard-date-input {
+    position: absolute;
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #e8e1e1bb;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    margin: 0 auto; /* increase margin to add more space */
+    width: 25%;
+    top: 80px;
+    right: 88px;
+    height: 22px;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  
+  .addtransactioncard-amount-input {
+    position: absolute;
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #e8e1e1bb;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    left: 89px;
+    top: 140px;
+    width: 60%;
+    height: 18px;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+
+  .addtransactioncard-card-input {
+    position: absolute;
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #e8e1e1bb;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    left: 89px;
+    top: 200px;
+    width: 60%;
+    height: 18px;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+
+  .addtransactioncard-type-input {
+    position: absolute;
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #e8e1e1bb;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    left: 89px;
+    top: 260px;
+    width: 60%;
+    height: 18px;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+
+  .addtransactioncard-category-input {
+    position: absolute;
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #e8e1e1bb;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    left: 89px;
+    top: 320px;
+    width: 60%;
+    height: 18px;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+
+  .addtransactioncard-comments-input {
+    position: absolute;
+    border: 1px solid #918e8ebb;
+    background-color: #0F0F0F;
+    color: #e8e1e1bb;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 10px; /* increase padding to add more space */
+    left: 89px;
+    top: 380px;
+    width: 60%;
+    height: 45px;
+  }
+
+footer {
+    position:absolute;
+    scroll-behavior:auto;
+    bottom:0px;
+    width: 100%;
+    align-items: center bottom;
+    text-align: center;
+    left:0;
+    right:0;
+    height:100px;
+    background-color: #404040;
+  }
+
+footer-text {
+    width: 90%;
+}
+
+footer a {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 5px 5px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+footer a:hover {
+  background-color: #dce0e0a9;
+  color: rgb(10, 10, 10);
+}
+
+footer a.active {
+  background-color: #adadadd3;
+  color: white;
+}
+
+.plotgraphcard {
+    position: absolute;
+    align-items: center;
+    left: 5%;
+    top: 150px;
+    width: 900px;
+    height: 1230px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color:#101010;
+  }
+
+.graph {
+    position: relative;
+    padding: 30px;
+    width: 750px;
+    height: 450px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin: 5%;
+    background-color:#1e1e1e;
+  }
+
+.blur {
+    /* backdrop-filter: blur(8px);  */
+    top:30px;
+    backdrop-filter: none;
+    height: 1400px;
+    width: 100%;
+  }
+
+  .flash {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color:#1e1e1e;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="JPWarr">
+
+    <title>Finance Tracker</title>
+
+    <!-- CSS FILES -->      
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik+Iso">
+
+    <link href="static/css/styles.css" rel="stylesheet">
+
+</head>
+
+<body class = "body2">
+
+<div class="topnav">
+    <p class="font1" href="#home">Finance Tracker</p>
+    <div class="right-links">
+            <a class="a2" onclick="openLoginForm()">Login</a>
+            <a class="a2" onclick="openSignupForm()">Sign Up</a>
+    </div>
+</div>
+
+<div class = "blur" id = "blur">
+<section id="login">
+
+        <div class="logincard" id="loginForm">
+            <form action="/login" method="POST" class="login webform"  role="form">
+                
+                <h5 class="logincard-title"> Login</h5>
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <input type="email" class="logincard-email-input" name="email" id="email" placeholder="Email" required>
+                </div>
+
+                <div class="form-group d-flex flex-column-reverse">
+                    <input type="text" class="logincard-password-input" name="password" id="password" placeholder="Password" required>
+                </div>
+
+                <button type="submit" class="submit-button" id="submit-button" name="submit">Login</button>
+                <button type="reset" class="cancel-button" onclick="closeLoginForm()">Cancel</button>
+            </form>
+        </div>
+
+</section>
+
+<section id="signup">
+
+    <div class="signupcard" id="signupForm">
+        <form action="/signup" method="POST" class="signup webform"  role="form">
+            
+            <h5 class="signupcard-title"> Sign Up</h5>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="text" class="signupcard-fname-input" name="first_name" id="first_name" placeholder="First Name" required>
+            </div>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="text" class="signupcard-lname-input" name="last_name" id="last_name" placeholder="Last Name" required>
+            </div>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="email" class="signupcard-email-input" name="email" id="email" placeholder="Email" required>
+            </div>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="text" class="signupcard-password-input" name="password" id="password" placeholder="Password" required>
+            </div>
+
+            <div class="form-group d-flex flex-column-reverse">
+                <input type="text" class="signupcard-password-retype" name="password_verification" id="password_verification" placeholder="Password Retype" required>
+            </div>
+
+            <button type="submit" class="submit-button" id="submit-button" name="submit">Sign Up</button>
+            <button type="reset" class="cancel-button" onclick=  "closeSignupForm()">Cancel</button>
+        </form>
+    </div>
+
+</section>
+
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  {% for category, message in messages %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+<script>
+
+    function openLoginForm() {
+        document.getElementById("loginForm").style.display = "block";
+        document.getElementById("blur").style.backdropFilter="blur(8px)";
+
+        document.getElementById("signupForm").style.display = "none";
+    }
+    function closeLoginForm() {
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("blur").style.backdropFilter = "none";
+    }
+    function openSignupForm() {
+        document.getElementById("signupForm").style.display = "block";
+        document.getElementById("blur").style.backdropFilter="blur(8px)";
+
+        document.getElementById("loginForm").style.display = "none";
+    }
+    function closeSignupForm() {
+        document.getElementById("signupForm").style.display = "none";
+        document.getElementById("blur").style.backdropFilter = "none";
+    }
+
+</script>
+
+</body>
+
+<footer>
+    <p>Designed by JPWarr: links: <a target="_blank" href="https://github.com/JPWarr7">| Github |</a>  <a target="_blank" href="https://github.com/JPWarr7/Finance-Tracker">| Repo |</a> <a target="_blank" href="https://www.linkedin.com/in/jonathan-warren-670089210/">| LinkedIn |</a></p>
+</footer>
+
+</html>
