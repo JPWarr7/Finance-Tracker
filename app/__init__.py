@@ -58,13 +58,13 @@ mail = Mail(app)
 from app import routes, models
 from populate_db import populate_db
 
-with app.app_context():
-    try:
-        db.drop_all()
-        db.create_all()
-        # populate_db()
-    except Exception as e:
-        print("Error:", e)
+# with app.app_context():
+#     try:
+#         db.drop_all()
+#         db.create_all()
+#         # populate_db()
+#     except Exception as e:
+#         print("Error:", e)
 
 # Populate database
 
