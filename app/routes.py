@@ -16,8 +16,8 @@ import pandas as pd
 mail = Mail(app)
 
 # Replace these values with your email credentials
-EMAIL_USER = 'jonathanwarren2022@gmail.com'
-EMAIL_PASSWORD = 'yzihkihuimvikfkw'
+EMAIL_USER = ''
+EMAIL_PASSWORD = ''
 
 def send_mail(addr, msg):
     recipient = addr
