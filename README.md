@@ -11,7 +11,7 @@ This app was designed to be a flask web-app used to track personal finance histo
 - Mutability of both transactions and payment methods added (edit/delete).
 
 #### Live Demo
-Inside the 'demo' folder of the repo, there is a .mp4 video file displaying all functionality, themes, and more. 
+Inside the 'live_demo' folder of the repo, there is a .mp4 video file displaying all functionality, themes, and more. 
 
 Thanks for showing interest in this project, I enjoyed the learning process throughout and hope that you can find a use for the project as well.
 
